@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="customizable-chess" level="project" />
+    <orderEntry type="library" name="customizable-console-menu" level="project" />
   </component>
 </module>
