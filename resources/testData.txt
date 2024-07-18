@@ -1,0 +1,7 @@
+{
+    "name": "Ethan Palser",
+    "height": "176",
+    "weight": "268.2",
+    "employment": "UNKNOWN",
+    "isAvailable": true
+}

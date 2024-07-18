@@ -1,0 +1,1 @@
+{"name":"Bruce Wayne","height":188,"weight":210.0,"employment":"FULL_TIME","isAvailable":false}
