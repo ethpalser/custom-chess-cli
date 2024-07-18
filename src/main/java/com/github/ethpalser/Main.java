@@ -1,8 +1,8 @@
-package main.java.com.github.ethpalser;
+package com.github.ethpalser;
 
+import com.github.ethpalser.menu.MainMenu;
 import com.github.ethpalser.menu.Menu;
 import com.github.ethpalser.ui.CommandMenu;
-import main.java.com.github.ethpalser.menu.MainMenu;
 
 public class Main {
 

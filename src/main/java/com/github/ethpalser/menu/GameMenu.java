@@ -1,11 +1,8 @@
-package main.java.com.github.ethpalser.menu;
+package com.github.ethpalser.menu;
 
 import com.chess.game.Game;
 import com.chess.game.Vector2D;
 import com.chess.game.movement.Action;
-import com.github.ethpalser.menu.ActionMenu;
-import com.github.ethpalser.menu.MenuAction;
-import com.github.ethpalser.menu.MenuItem;
 
 public class GameMenu extends ActionMenu {
 

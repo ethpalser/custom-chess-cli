@@ -1,4 +1,4 @@
-package main.java.com.github.ethpalser.menu;
+package com.github.ethpalser.menu;
 
 import com.chess.game.Game;
 import com.github.ethpalser.menu.MenuAction;
