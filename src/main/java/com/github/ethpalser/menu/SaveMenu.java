@@ -1,5 +1,7 @@
 package com.github.ethpalser.menu;
 
+import com.ethpalser.cli.menu.SimpleMenu;
+
 public class SaveMenu extends SimpleMenu {
 
     public SaveMenu() {

@@ -1,29 +1,32 @@
 package com.github.ethpalser.menu;
 
 import com.chess.game.Game;
-import com.github.ethpalser.menu.MenuAction;
-import com.github.ethpalser.menu.MenuItem;
-import com.github.ethpalser.menu.SimpleMenu;
+import com.ethpalser.cli.menu.Context;
+import com.ethpalser.cli.menu.MenuItem;
+import com.ethpalser.cli.menu.SimpleMenu;
+import com.ethpalser.cli.menu.event.EventType;
 
 public class MainMenu extends SimpleMenu {
 
     private Game current;
 
-    public MainMenu() {
+    public MainMenu(Game game) {
         super("Main");
-        this.current = new Game();
+        this.current = game;
+        // todo: check if there is at least one file to load to display resume and load
+        this.addChild(new GameMenu(this.current));
         this.addChild(setupResumeCommand());
-        this.addChild(new GameMenu(current));
+        this.addChild(new LoadMenu());
     }
 
     // Load the latest game
     private MenuItem setupResumeCommand() {
-        return new MenuAction("Resume") {
-            @Override
-            public void execute(String s) {
-
-            }
-        };
+        MenuItem resumeAction = new MenuItem("Resume");
+        resumeAction.addEventListener(EventType.EXECUTE, event -> {
+            // todo: fetch most recent save file, set it to current
+            Context.getInstance().push(new GameMenu(this.current));
+        });
+        return resumeAction;
     }
 
 }
