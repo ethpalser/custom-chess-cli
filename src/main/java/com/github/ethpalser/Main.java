@@ -1,6 +1,10 @@
 package com.github.ethpalser;
 
-import com.chess.game.Game;
+import com.ethpalser.chess.board.BoardType;
+import com.ethpalser.chess.board.ChessBoard;
+import com.ethpalser.chess.game.ChessGame;
+import com.ethpalser.chess.game.Game;
+import com.ethpalser.chess.log.ChessLog;
 import com.ethpalser.cli.console.ConsoleReader;
 import com.ethpalser.cli.console.ConsoleRunner;
 import com.ethpalser.cli.console.ConsoleWriter;
@@ -18,7 +22,9 @@ public class Main {
 
     public static void main(String[] args) {
         Context context = Context.getInstance();
-        Game chessGame = new Game();
+        ChessLog log = new ChessLog();
+        ChessBoard board = new ChessBoard(BoardType.STANDARD, log);
+        Game chessGame = new ChessGame(board, log);
         Menu main = new MainMenu(chessGame);
         ConsoleRunner runner = new ConsoleRunner(context, main);
         ConsoleReader reader = new ConsoleReader(new BufferedReader(new InputStreamReader(System.in)));
