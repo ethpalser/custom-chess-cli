@@ -32,16 +32,42 @@ public class GameMenu extends Menu {
     }
 
     private MenuItem setupMovePieceCommand() {
-        // todo: allow this command be the default command, so typing "move" is not required
         MenuItem movePieceAction = new MenuItem("Move");
-        movePieceAction.addEventListener(EventType.EXECUTE, event ->
-                game.executeAction(new Action(game.getTurnColour(), new Vector2D(), new Vector2D())));
+        movePieceAction.addEventListener(EventType.EXECUTE, event -> {
+            String[] args = event.getCommand().split("\\w");
+            // Assuming args are: [commandStr, point1Str, point2Str]
+            if (args.length == 3) {
+                Colour colour = game.getTurn() % 2 == 0 ? Colour.BLACK : Colour.WHITE;
+                GameStatus status = game.updateGame(new Action(colour, new Point(args[1]), new Point(args[2])));
+
+                if (!GameStatus.ONGOING.equals(status)) {
+                    ConsoleWriter cw = new ConsoleWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+                    try {
+                        switch (status) {
+                            case WHITE_IN_CHECK -> cw.write("white check");
+                            case BLACK_IN_CHECK -> cw.write("black check");
+                            case STALEMATE -> cw.write("stalemate");
+                            case WHITE_WIN, BLACK_WIN -> cw.write("checkmate!");
+                            case NO_CHANGE -> cw.write("move not allowed");
+                            default -> {
+                                // Do nothing
+                            }
+                        }
+                        cw.close();
+                    } catch (IOException ex) {
+                        // do nothing
+                    }
+                }
+            }
+        });
         return movePieceAction;
     }
 
     private MenuItem setupSaveCommand() {
         MenuItem saveAction = new MenuItem("Save");
-        saveAction.addEventListener(EventType.EXECUTE, event -> writer.write(this.game, Game.class, SaveData.FILE_DIR));
+        saveAction.addEventListener(EventType.EXECUTE, event -> {
+            writer.write(this.game.toJson(), String.class, SaveData.FILE_DIR);
+        });
         return saveAction;
     }
 
