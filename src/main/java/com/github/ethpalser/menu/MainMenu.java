@@ -1,6 +1,6 @@
 package com.github.ethpalser.menu;
 
-import com.chess.game.Game;
+import com.ethpalser.chess.game.Game;
 import com.ethpalser.cli.menu.Context;
 import com.ethpalser.cli.menu.MenuItem;
 import com.ethpalser.cli.menu.SimpleMenu;

@@ -1,13 +1,19 @@
 package com.github.ethpalser.menu;
 
-import com.chess.game.Game;
-import com.chess.game.Vector2D;
-import com.chess.game.movement.Action;
+import com.ethpalser.chess.game.Action;
+import com.ethpalser.chess.game.Game;
+import com.ethpalser.chess.game.GameStatus;
+import com.ethpalser.chess.piece.Colour;
+import com.ethpalser.chess.space.Point;
+import com.ethpalser.cli.console.ConsoleWriter;
 import com.ethpalser.cli.menu.Menu;
 import com.ethpalser.cli.menu.MenuItem;
 import com.ethpalser.cli.menu.event.EventType;
 import com.github.ethpalser.data.DataWriter;
 import com.github.ethpalser.data.SaveData;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class GameMenu extends Menu {
 
