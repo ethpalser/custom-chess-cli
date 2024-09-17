@@ -1,4 +1,4 @@
-package com.github.ethpalser.menu;
+package com.ethpalser.menu;
 
 import com.ethpalser.chess.game.Action;
 import com.ethpalser.chess.game.Game;
@@ -9,8 +9,8 @@ import com.ethpalser.cli.console.ConsoleWriter;
 import com.ethpalser.cli.menu.Menu;
 import com.ethpalser.cli.menu.MenuItem;
 import com.ethpalser.cli.menu.event.EventType;
-import com.github.ethpalser.data.DataWriter;
-import com.github.ethpalser.data.SaveData;
+import com.ethpalser.data.DataWriter;
+import com.ethpalser.data.SaveData;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;

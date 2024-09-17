@@ -1,4 +1,4 @@
-package com.github.ethpalser;
+package com.ethpalser;
 
 import com.ethpalser.chess.board.BoardType;
 import com.ethpalser.chess.board.ChessBoard;
@@ -10,9 +10,9 @@ import com.ethpalser.cli.console.ConsoleRunner;
 import com.ethpalser.cli.console.ConsoleWriter;
 import com.ethpalser.cli.menu.Context;
 import com.ethpalser.cli.menu.Menu;
-import com.github.ethpalser.data.DataWriter;
-import com.github.ethpalser.data.SaveData;
-import com.github.ethpalser.menu.MainMenu;
+import com.ethpalser.data.DataWriter;
+import com.ethpalser.data.SaveData;
+import com.ethpalser.menu.MainMenu;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;

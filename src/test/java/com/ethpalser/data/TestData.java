@@ -1,4 +1,4 @@
-package com.github.ethpalser.data;
+package com.ethpalser.data;
 
 public class TestData {
 

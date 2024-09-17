@@ -1,4 +1,4 @@
-package com.github.ethpalser.menu;
+package com.ethpalser.menu;
 
 import com.ethpalser.chess.game.Game;
 import com.ethpalser.cli.menu.Context;

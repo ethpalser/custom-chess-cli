@@ -1,4 +1,4 @@
-package com.github.ethpalser.data;
+package com.ethpalser.data;
 
 import java.io.File;
 import org.junit.jupiter.api.Assertions;

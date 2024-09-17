@@ -1,4 +1,4 @@
-package com.github.ethpalser.data;
+package com.ethpalser.data;
 
 import com.google.gson.JsonSyntaxException;
 import org.junit.jupiter.api.Assertions;
