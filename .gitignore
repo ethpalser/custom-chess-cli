@@ -5,6 +5,9 @@ out
 
 gradle
 .idea
+*.ipr
+*.iws
+*.iml
 
 # Log file
 *.log
