@@ -33,7 +33,7 @@ public class GameMenu extends Menu {
 
     private MenuItem setupMovePieceCommand() {
         MenuItem movePieceAction = new MenuItem("Move");
-        movePieceAction.addEventListener(EventType.EXECUTE, event -> {
+        movePieceAction.addEventListener(EventType.SELECT, event -> {
             String[] args = event.getCommand().split("\\w");
             // Assuming args are: [commandStr, point1Str, point2Str]
             if (args.length == 3) {
@@ -65,7 +65,7 @@ public class GameMenu extends Menu {
 
     private MenuItem setupSaveCommand() {
         MenuItem saveAction = new MenuItem("Save");
-        saveAction.addEventListener(EventType.EXECUTE, event -> {
+        saveAction.addEventListener(EventType.SELECT, event -> {
             writer.write(this.game.toJson(), String.class, SaveData.FILE_DIR);
         });
         return saveAction;

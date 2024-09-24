@@ -22,7 +22,7 @@ public class MainMenu extends SimpleMenu {
     // Load the latest game
     private MenuItem setupResumeCommand() {
         MenuItem resumeAction = new MenuItem("Resume");
-        resumeAction.addEventListener(EventType.EXECUTE, event -> {
+        resumeAction.addEventListener(EventType.SELECT, event -> {
             // todo: fetch most recent save file, set it to current
             Context.getInstance().push(new GameMenu(this.current));
         });
