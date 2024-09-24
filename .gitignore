@@ -3,11 +3,21 @@
 build
 out
 
-gradle
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### IntelliJ IDEA ###
 .idea
-*.ipr
+.idea/sonarlint/issuestore/index.pb
 *.iws
 *.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
 # Log file
 *.log
@@ -30,6 +40,4 @@ gradle
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-
-.gradle
-.idea/sonarlint/issuestore/index.pb
+gradle/wrapper/gradle-wrapper.properties
