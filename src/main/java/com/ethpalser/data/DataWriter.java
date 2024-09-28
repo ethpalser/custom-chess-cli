@@ -3,9 +3,12 @@ package com.ethpalser.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class DataWriter {
 
@@ -23,12 +26,21 @@ public class DataWriter {
         }
     }
 
-    public void writeSaveFile(SaveData saveData, String fileName) {
-        this.write(saveData, SaveData.class, SaveData.FILE_DIR + fileName);
-    }
-
-    public void writePieceFile(PieceData pieceData, String fileName) {
-        this.write(pieceData, PieceData.class, PieceData.FILE_DIR + fileName);
+    public void write(String text, String filePath, String fileName) {
+        try {
+            Files.createDirectories(Path.of(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String fullPath = filePath + "/" + fileName;
+        File file = new File(fullPath);
+        if (text != null) {
+            try (FileWriter writer = new FileWriter(fullPath)) {
+                writer.write(text);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

@@ -1,18 +1,25 @@
 package com.ethpalser.menu;
 
+import com.ethpalser.chess.game.ChessGame;
 import com.ethpalser.chess.game.Game;
+import com.ethpalser.chess.view.GameView;
 import com.ethpalser.cli.menu.Context;
 import com.ethpalser.cli.menu.MenuItem;
 import com.ethpalser.cli.menu.SimpleMenu;
 import com.ethpalser.cli.menu.event.EventType;
+import com.ethpalser.data.DataReader;
+import com.ethpalser.data.SaveData;
 
 public class MainMenu extends SimpleMenu {
 
     private Game current;
+    private DataReader reader;
 
     public MainMenu(Game game) {
         super("Main");
         this.current = game;
+
+        reader = new DataReader();
         // todo: check if there is at least one file to load to display resume and load
         this.addChild(new GameMenu(this.current));
         this.addChild(setupResumeCommand());
@@ -24,6 +31,7 @@ public class MainMenu extends SimpleMenu {
         MenuItem resumeAction = new MenuItem("Resume");
         resumeAction.addEventListener(EventType.SELECT, event -> {
             // todo: fetch most recent save file, set it to current
+            String fileStr = reader.read(SaveData.FILE_DIR, SaveData.FILE_NAME);
             Context.getInstance().push(new GameMenu(this.current));
         });
         return resumeAction;

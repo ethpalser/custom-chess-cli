@@ -82,7 +82,12 @@ public class GameMenu extends Menu {
     private MenuItem setupSaveCommand() {
         MenuItem saveAction = new MenuItem("Save");
         saveAction.addEventListener(EventType.SELECT, event -> {
-            writer.write(this.game.toJson(), String.class, SaveData.FILE_DIR);
+            writer.write(this.game.toJson(), SaveData.FILE_DIR, SaveData.FILE_NAME);
+            try {
+                cw.write("game saved\n");
+            } catch (IOException e) {
+                // do nothing
+            }
         });
         return saveAction;
     }
