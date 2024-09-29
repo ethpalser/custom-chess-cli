@@ -8,7 +8,6 @@ class TestDataWriter {
 
     @Test
     void testWrite_givenMissingFile_thenFileCreated() {
-        DataWriter writer = new DataWriter();
         TestData testData = new TestData.TestDataBuilder("Bruce Wayne")
                 .height(188)
                 .weight(210)
@@ -16,10 +15,9 @@ class TestDataWriter {
                 .isAvailable(false)
                 .build();
         String writePath = "resources/newTestData.txt";
-        writer.write(testData, TestData.class, writePath);
+        Saves.writeAsJson(testData, TestData.class, writePath);
 
-        DataReader reader = new DataReader();
-        TestData writtenData = (TestData) reader.read(TestData.class, writePath);
+        TestData writtenData = (TestData) Saves.readAsJson(TestData.class, writePath);
         Assertions.assertNotNull(writtenData);
         Assertions.assertEquals("Bruce Wayne", writtenData.getName());
 
@@ -33,7 +31,6 @@ class TestDataWriter {
 
     @Test
     void testWrite_givenExistingFile_thenFileOverwritten() {
-        DataWriter writer = new DataWriter();
         TestData testData = new TestData.TestDataBuilder("Batman")
                 .height(188)
                 .weight(210)
@@ -41,11 +38,10 @@ class TestDataWriter {
                 .isAvailable(true)
                 .build();
         String writePath = "resources/testData2.txt";
-        writer.write(testData, TestData.class, writePath);
+        Saves.writeAsJson(testData, TestData.class, writePath);
 
         // Read what was written to file for assertions
-        DataReader reader = new DataReader();
-        TestData writenData = (TestData) reader.read(TestData.class, writePath);
+        TestData writenData = (TestData) Saves.readAsJson(TestData.class, writePath);
         Assertions.assertNotNull(writenData);
         Assertions.assertEquals("Batman", writenData.getName());
 
@@ -56,17 +52,15 @@ class TestDataWriter {
                 .employment(TestData.Employment.FULL_TIME)
                 .isAvailable(false)
                 .build();
-        writer.write(original, TestData.class, writePath);
+        Saves.writeAsJson(original, TestData.class, writePath);
     }
 
     @Test
     void testWrite_givenNullObject_thenJsonException() {
-        DataWriter writer = new DataWriter();
         String writePath = "resources/testData3.txt";
-        writer.write(null, TestData.class, writePath);
+        Saves.writeAsJson(null, TestData.class, writePath);
 
-        DataReader reader = new DataReader();
-        TestData writenData = (TestData) reader.read(TestData.class, writePath);
+        TestData writenData = (TestData) Saves.readAsJson(TestData.class, writePath);
         Assertions.assertNull(writenData);
     }
 

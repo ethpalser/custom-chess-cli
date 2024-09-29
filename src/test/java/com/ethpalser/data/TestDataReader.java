@@ -8,23 +8,20 @@ class TestDataReader {
 
     @Test
     void testRead_givenMissingFile_thenNull() {
-        DataReader reader = new DataReader();
-        TestData data = (TestData) reader.read(TestData.class, "/fileNotFound.txt");
+        TestData data = (TestData) Saves.readAsJson(TestData.class, "/fileNotFound.txt");
         Assertions.assertNull(data);
     }
 
     @Test
     void testRead_givenNonJsonFormat_thenJsonSyntaxException() {
-        DataReader reader = new DataReader();
         Assertions.assertThrows(JsonSyntaxException.class, () -> {
-            reader.read(TestData.class, "resources/notTestData.txt");
+            Saves.readAsJson(TestData.class, "resources/notTestData.txt");
         });
     }
 
     @Test
     void testRead_givenJsonFormat_thenObject() {
-        DataReader reader = new DataReader();
-        TestData data = (TestData) reader.read(TestData.class, "resources/testData.txt");
+        TestData data = (TestData) Saves.readAsJson(TestData.class, "resources/testData.txt");
         Assertions.assertNotNull(data);
         // The following values are defined in the file
         Assertions.assertEquals("Ethan Palser", data.getName());
