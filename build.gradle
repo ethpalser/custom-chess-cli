@@ -1,6 +1,7 @@
 plugins {
     id 'idea'
     id 'java'
+    id 'application'
 }
 
 group = 'com.github.ethpalser'
@@ -27,4 +28,12 @@ tasks.named('test') {
 
 tasks.named('wrapper') {
     gradleVersion = '8.6'
+}
+
+tasks.run.configure {
+    standardInput = System.in
+}
+
+application {
+    mainClass = "com.ethpalser.Main"
 }
