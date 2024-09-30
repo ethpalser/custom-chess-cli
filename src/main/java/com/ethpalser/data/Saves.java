@@ -76,4 +76,20 @@ public class Saves {
         }
         return null;
     }
+
+    public static String sessionToJson(Session session) {
+        if (session == null) {
+            return null;
+        }
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(session);
+    }
+
+    public static Session sessionFromJson(String json) {
+        if (json == null) {
+            return null;
+        }
+        Gson gson = new Gson();
+        return gson.fromJson(json, Session.class);
+    }
 }

@@ -1,12 +1,14 @@
 package com.ethpalser.menu;
 
 import com.ethpalser.chess.game.ChessGame;
-import com.ethpalser.chess.game.Game;
+import com.ethpalser.chess.piece.Colour;
 import com.ethpalser.cli.menu.Context;
+import com.ethpalser.cli.menu.Menu;
 import com.ethpalser.cli.menu.MenuItem;
 import com.ethpalser.cli.menu.SimpleMenu;
 import com.ethpalser.cli.menu.event.EventType;
 import com.ethpalser.data.Saves;
+import com.ethpalser.data.Session;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -20,10 +22,10 @@ public class MainMenu extends SimpleMenu {
     public MainMenu() {
         super("Main");
 
-        this.addChild(new GameMenu(null));
+        this.addChild(setupStartCommand());
         this.addChild(setupResumeCommand());
 
-        // Before rendering menu, check if there is anything to load
+        // Before rendering menu, check if there is anything to load before showing "resume" menu
         this.addEventListener(EventType.PRE_RENDER, event -> {
             Path savePath = Paths.get(Saves.GAME_FILE_DIR);
             if (Files.isDirectory(savePath, LinkOption.NOFOLLOW_LINKS)) {
@@ -41,6 +43,22 @@ public class MainMenu extends SimpleMenu {
                 }
             }
         });
+    }
+
+    private MenuItem setupStartCommand() {
+        MenuItem whiteChoice = new MenuItem("White");
+        whiteChoice.addEventListener(EventType.SELECT, event -> {
+            Context.getInstance().push(new GameMenu(null, Colour.WHITE));
+        });
+
+        MenuItem blackChoice = new MenuItem("Black");
+        blackChoice.addEventListener(EventType.SELECT, event -> {
+            Context.getInstance().push(new GameMenu(null, Colour.BLACK));
+        });
+
+        Menu startMenu = new SimpleMenu("Start");
+        startMenu.addChildren(whiteChoice, blackChoice);
+        return startMenu;
     }
 
     // Load the latest game
@@ -63,8 +81,12 @@ public class MainMenu extends SimpleMenu {
                 }
             }
             if (content != null) {
-                Game resumed = ChessGame.fromJson(content);
-                Context.getInstance().push(new GameMenu(resumed));
+                Session resumed = Saves.sessionFromJson(content);
+                if (resumed != null) {
+                    Context.getInstance().push(new GameMenu(new ChessGame(resumed.getGameView()), resumed.getPlayer()));
+                } else {
+                    Context.getInstance().push((Menu) setupStartCommand());
+                }
             }
         });
         return resumeAction;
